@@ -9,6 +9,7 @@ print(turtle.heading())
 turtle.seth(180)
 turtle.forward(100)
 
+turtle.reset()
 
 
 screen.exitonclick()

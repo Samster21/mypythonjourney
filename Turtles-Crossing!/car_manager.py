@@ -27,4 +27,6 @@ class CarManager():
     def increment(self):
         self.move_speed += MOVE_INCREMENT
 
-
+    def revert(self):
+        for car in self.all_cars:
+            car.reset()

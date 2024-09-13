@@ -10,10 +10,14 @@ class Player(Turtle):
         self.shape("turtle")
         self.color("black")
         self.penup()
-        self.teleport(0,-280)
+        self.goto(0,-280)
         self.seth(90)
         self.finish = FINISH_LINE_Y
 
     def move(self):
         self.forward(MOVE_DISTANCE)
+
+    def revert(self):
+        self.goto(x=0,y=-280)
+
 

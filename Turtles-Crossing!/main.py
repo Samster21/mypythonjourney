@@ -17,22 +17,24 @@ game_is_on = True
 
 cars = CarManager()
 
-# level = Scoreboard()
-#
-# level.update()
+level = Scoreboard()
+level.update()
 
 while game_is_on:
     time.sleep(0.1)
     screen.update()
     cars.generate()
+    cars.move()
     for car in cars.all_cars:
         if car.distance(player) < 23:
             game_is_on = False
-    # if player.ycor() < 280:
-    #     level.update()
-    #     cars.increment()
-    #     screen.resetscreen()
+            level.game_over()
 
-    cars.move()
+    if player.ycor() > 280:
+        level.update()
+        cars.increment()
+        player.revert()
+
+
 
 screen.exitonclick()
