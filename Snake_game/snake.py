@@ -1,17 +1,21 @@
 from turtle import Turtle, Screen
 
 
-class Snake:
+class SnakeBody(Turtle):
+    def __init__(self, speed):
+        super().__init__()
+        self.shape("square")
+        self.color("white")
+        self.speed(speed)
+        self.penup()
 
+
+class Snake:
     def __init__(self, length, speed):
         self.segments = []
         self.length = length
         for _ in range(length):
-            new_turtle = Turtle()
-            new_turtle.shape("square")
-            new_turtle.color("white")
-            new_turtle.speed(speed)
-            new_turtle.penup()
+            new_turtle = SnakeBody(speed=speed)
             new_turtle.goto(x=-20 * _, y=0)
             self.segments.append(new_turtle)
         self.head = self.segments[0]
@@ -45,8 +49,6 @@ class Snake:
             self.head.right(90)
         elif self.head.heading() == 180.0:
             self.head.left(90)
-
-
 
     def move(self):
         for i in range(self.length - 1, 0, -1):
