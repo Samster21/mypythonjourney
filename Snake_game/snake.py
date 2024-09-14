@@ -12,10 +12,15 @@ class SnakeBody(Turtle):
 
 class Snake:
     def __init__(self, length, speed):
+        self.head = None
         self.segments = []
+        self.initial_length = length
         self.length = length
-        for _ in range(length):
-            new_turtle = SnakeBody(speed=speed)
+        self.speed = speed
+
+    def create_snake(self):
+        for _ in range(self.initial_length):
+            new_turtle = SnakeBody(speed=self.speed)
             new_turtle.goto(x=-20 * _, y=0)
             self.segments.append(new_turtle)
         self.head = self.segments[0]
@@ -51,20 +56,20 @@ class Snake:
             self.head.left(90)
 
     def move(self):
-        for i in range(self.length - 1, 0, -1):
+        for i in range(len(self.segments)-1, 0, -1):
             new_position = self.segments[i - 1].pos()
-            self.segments[i].goto(new_position)
+            self.segments[i].goto(new_position[0], new_position[1])
         self.head.forward(20)
 
     def eat(self, speed):
-        new_turtle = Turtle()
-        new_turtle.shape("square")
-        new_turtle.color("white")
-        new_turtle.speed(speed)
-        new_turtle.penup()
-        new_turtle.goto(self.segments[self.length - 1].pos())
-        self.length += 1
+        new_turtle = SnakeBody(speed=speed)
+        position = self.segments[len(self.segments)-1].pos()
+        new_turtle.teleport(position[0],position[1])
         self.segments.append(new_turtle)
 
-    def retry(self):
-        return True
+    def snake_reset(self):
+        for _ in self.segments:
+            _.teleport(1000,1000)
+        self.segments.clear()
+        self.length = self.initial_length
+        self.create_snake()

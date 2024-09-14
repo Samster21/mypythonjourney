@@ -7,11 +7,9 @@ class Food(Turtle):
         super().__init__()
         self.shape("circle")
         self.color("green")
-        self.speed("fastest")
         self.penup()
-        self.goto(randint(-280, 280), randint(-280, 280))
+
 
     def respawn(self):
-        self.hideturtle()
-        self.goto(randint(-280, 280), randint(-280, 280))
-        self.showturtle()
+        self.teleport(randint(-250, 250), randint(-250, 250))
+
